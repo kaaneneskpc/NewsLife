@@ -8,6 +8,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import eu.tutorials.newsapp.ui.NewsApp
 import eu.tutorials.newsapp.ui.theme.NewsAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,18 +19,19 @@ class MainActivity : ComponentActivity() {
             NewsAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-
+              //Todo 6: Call the NewsApp
+                    NewsApp()
                 }
             }
         }
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     NewsAppTheme {
-//Todo 1: remove the Greeting Method and also delete it
-    }
+        //Todo 7: call the NewsApp
+        NewsApp()
+  }
 }

@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/compose-model-1635934413990.xml" value="0.2542087542087542" />
         <entry key="../../../../../layout/compose-model-1636029076528.xml" value="0.23779461279461278" />
+<<<<<<< HEAD
         <entry key="../../../../../layout/compose-model-1636033737090.xml" value="0.25" />
         <entry key="../../../../../layout/compose-model-1636033807672.xml" value="0.25" />
         <entry key="../../../../../layout/compose-model-1636040222732.xml" value="0.1" />
@@ -12,6 +13,8 @@
         <entry key="../../../../../layout/compose-model-1636096854261.xml" value="0.335" />
         <entry key="../../../../../layout/compose-model-1636366684234.xml" value="0.25" />
         <entry key="../../../../../layout/compose-model-1636409098725.xml" value="0.11" />
+=======
+>>>>>>> integrate bottom screen
       </map>
     </option>
   </component>

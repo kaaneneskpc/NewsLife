@@ -29,6 +29,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     NewsAppTheme {
-
+//Todo 1: remove the Greeting Method and also delete it
     }
 }

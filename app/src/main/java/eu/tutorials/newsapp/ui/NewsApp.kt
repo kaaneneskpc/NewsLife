@@ -22,10 +22,12 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = "TopNews") {
         //Todo 5:add two composable with the route and function for the two screens
         composable("TopNews") {
-            TopNews()
+            //Todo 14: provide navcontroller value
+            TopNews(navController = navController)
         }
         composable("Detail"){
-            DetailScreen()
+            //Todo 15: provide nav controller value
+            DetailScreen(navController)
         }
     }
 }

@@ -20,7 +20,9 @@ fun DetailScreen(navController: NavController) {
         //Todo 9: Add a Button to go the TopNews screen
         Button(onClick = {
             //Todo 13: use navcontroller to navigate to topnews
-            navController.navigate("TopNews")
+            //navController.navigate("TopNews")
+            //Todo 16: use popBackStack to avoid duplicate screens
+            navController.popBackStack()
         }) {
             Text(text = "Go Back to TopNews")
         }

@@ -12,16 +12,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
-//Todo 12: create a nav controller variable
 @Composable
 fun DetailScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Detail Screen",fontWeight = FontWeight.SemiBold)
-        //Todo 9: Add a Button to go the TopNews screen
         Button(onClick = {
-            //Todo 13: use navcontroller to navigate to topnews
-            //navController.navigate("TopNews")
-            //Todo 16: use popBackStack to avoid duplicate screens
             navController.popBackStack()
         }) {
             Text(text = "Go Back to TopNews")

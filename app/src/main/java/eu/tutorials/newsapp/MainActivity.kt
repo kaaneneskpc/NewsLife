@@ -19,7 +19,6 @@ class MainActivity : ComponentActivity() {
             NewsAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-              //Todo 6: Call the NewsApp
                     NewsApp()
                 }
             }
@@ -31,7 +30,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     NewsAppTheme {
-        //Todo 7: call the NewsApp
         NewsApp()
   }
 }

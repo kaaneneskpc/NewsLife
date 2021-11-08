@@ -19,16 +19,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import eu.tutorials.newsapp.NewsData
 import eu.tutorials.newsapp.R
 
+//Todo 4: create navController variable
 @Composable
-fun DetailScreen(newsData: NewsData, scrollState: ScrollState) {
+fun DetailScreen(newsData: NewsData, scrollState: ScrollState,navController: NavController) {
     //Todo 1: Add a scaffold, reference topBar with empty block and move the Column into its block
     Scaffold(topBar = {
         //Todo 3: pass in detailTopApp as the value for topBar
-        DetailTopAppBar()
+        //Todo 5: call popBacStack on navController to go back to the previous screen
+        DetailTopAppBar(onBackPressed = {navController.popBackStack()})
     }) {
         Column(
             modifier = Modifier
@@ -81,6 +84,7 @@ fun InfoWithIcon(icon: ImageVector, info: String) {
     }
 }
 
+//Todo 6: provide value for nav controller
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
@@ -91,6 +95,7 @@ fun DetailScreenPreview() {
             title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
             description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
             publishedAt = "2021-11-04T04:42:40Z"
-        ), rememberScrollState()
+        ), rememberScrollState(),
+        rememberNavController()
     )
 }

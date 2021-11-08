@@ -1,8 +1,6 @@
 package eu.tutorials.newsapp
 
-//Todo 2: create a MockData object
 object MockData {
-    //Todo 3: create a news list
     val topNewsList = listOf<NewsData>(
         NewsData(
             1,
@@ -66,4 +64,11 @@ object MockData {
             description = "Principal Patricia Lampron and another employee were assaulted at Henderson Upper Campus during dismissal on Wednesday.",
             publishedAt = "2021-11-04T01:55:00Z"
         ))
+
+
+
+    //Todo 6 : implement a method to filter a news by its id
+    fun getNews(newsId: Int?): NewsData {
+        return topNewsList.first { it.id == newsId }
+    }
 }

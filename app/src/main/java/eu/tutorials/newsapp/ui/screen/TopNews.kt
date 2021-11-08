@@ -1,6 +1,7 @@
 package eu.tutorials.newsapp.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,31 +20,31 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import eu.tutorials.newsapp.MockData
 import eu.tutorials.newsapp.NewsData
+import kotlinx.coroutines.runInterruptible
 
 @Composable
 fun TopNews(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally) {
       Text(text = "Top News",fontWeight = FontWeight.SemiBold)
-        //Todo 6: Replace the Button with LazyColumn and pass in the list from mockdata
-        LazyColumn{
+       LazyColumn{
             items(MockData.topNewsList){newsData->
-                //Todo 7: Use TopNewsItem as the UI and pass in the result from the items
-                TopNewsItem(newsData = newsData)
+                TopNewsItem(newsData =newsData,
+                    //Todo 2 add the function to navigate to the detail screen passing the id for clicked item
+                onNewsClick = {  navController.navigate("Detail/${newsData.id}")}
+                    )
             }
         }
     }
 }
 
-/**Todo 4: Create UI template for each news item
- * First we add a Box so we can have an image from each item on top as a background
- * Then we add a Column with padding top and start with vertical arrangement to space in between
- * In the Column we add a Text to show the published date and another Text to show the Title,
- * The date is not properly formatted so we will fix that in coming lectures
- * Next we add a Spacer to push the title towards to bottom
- */
 @Composable
-fun TopNewsItem(newsData: NewsData) {
-    Box(modifier = Modifier.height(200.dp).padding(8.dp)) {
+fun TopNewsItem(newsData: NewsData,onNewsClick: () -> Unit = {},) {
+    Box(modifier = Modifier
+        .height(200.dp)
+        .padding(8.dp).clickable {
+            //Todo 1: make each item clickable and add the onNewsClick function
+          onNewsClick()
+        }) {
         Image(painter = painterResource(id = newsData.image), contentDescription ="",contentScale = ContentScale.FillBounds)
         Column(modifier = Modifier
             .wrapContentHeight()
@@ -59,7 +60,6 @@ fun TopNewsItem(newsData: NewsData) {
 @Preview(showBackground = true)
 @Composable
 fun TopNewsPreview() {
-    //Todo 5: we add TopNewsItem in the Preview with a sample data to review the UI
     TopNewsItem(  NewsData(
         2,
         author = "Namita Singh",

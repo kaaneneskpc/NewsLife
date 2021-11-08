@@ -5,9 +5,9 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
@@ -19,39 +19,53 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import eu.tutorials.newsapp.NewsData
 import eu.tutorials.newsapp.R
 
-//Todo 5: create scrollState variable and add verticalScroll to the Column passing in the scrollState created
 @Composable
 fun DetailScreen(newsData: NewsData, scrollState: ScrollState) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(scrollState),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold)
-        //Todo 1 Remove the  Button and add an Image and set newsData.image as resource
-        Image(painter = painterResource(id = newsData.image), contentDescription = "")
-        //Todo 3: add a Row then use the InfoWithIcon composable to show author and published date
-        Row(
+    //Todo 1: Add a scaffold, reference topBar with empty block and move the Column into its block
+    Scaffold(topBar = {
+        //Todo 3: pass in detailTopApp as the value for topBar
+        DetailTopAppBar()
+    }) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            InfoWithIcon(Icons.Default.Edit, info = newsData.author)
-            InfoWithIcon(icon = Icons.Default.DateRange, info = newsData.publishedAt)
-        }
-        //Todo 4 add two Text for news title and news descriptionm
-        Text(text = newsData.title, fontWeight = FontWeight.Bold)
-        Text(text = newsData.description, modifier = Modifier.padding(top = 16.dp))
-    }
 
+            Image(painter = painterResource(id = newsData.image), contentDescription = "")
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                InfoWithIcon(Icons.Default.Edit, info = newsData.author)
+                InfoWithIcon(icon = Icons.Default.DateRange, info = newsData.publishedAt)
+            }
+            Text(text = newsData.title, fontWeight = FontWeight.Bold)
+            Text(text = newsData.description, modifier = Modifier.padding(top = 16.dp))
+        }
+    }
 }
 
-//Todo 2 create a reusable function for displaying author and published date
+/** Todo 2: create composable for the detail top bar with TopAppBar
+ * containing a title and the navigationIcon
+ */
+@Composable
+fun DetailTopAppBar(onBackPressed: () -> Unit = {}) {
+    TopAppBar(title = { Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold) },
+        navigationIcon = {
+            IconButton(onClick = { onBackPressed() }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Arrow Back")
+            }
+        })
+}
+
 @Composable
 fun InfoWithIcon(icon: ImageVector, info: String) {
     Row {
@@ -67,7 +81,6 @@ fun InfoWithIcon(icon: ImageVector, info: String) {
     }
 }
 
-//Todo 6: provide scrollState remember value for previewing
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {

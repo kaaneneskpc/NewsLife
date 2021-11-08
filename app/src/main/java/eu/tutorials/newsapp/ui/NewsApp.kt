@@ -18,7 +18,6 @@ fun NewsApp() {
 
 @Composable
 fun Navigation() {
-    //Todo 7: create scrollState remember value
     val scrollState = rememberScrollState()
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "TopNews") {
@@ -31,7 +30,6 @@ fun Navigation() {
             )){navBackStackEntry->
             val id = navBackStackEntry.arguments?.getInt("newsId")
             val newsData = MockData.getNews(id)
-            //Todo 8: pass in scroll state value
             DetailScreen(newsData,scrollState)
         }
     }

@@ -1,7 +1,10 @@
 package eu.tutorials.newsapp.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -19,13 +22,14 @@ import androidx.compose.ui.unit.dp
 import eu.tutorials.newsapp.NewsData
 import eu.tutorials.newsapp.R
 
-
+//Todo 5: create scrollState variable and add verticalScroll to the Column passing in the scrollState created
 @Composable
-fun DetailScreen(newsData: NewsData) {
+fun DetailScreen(newsData: NewsData, scrollState: ScrollState) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold)
@@ -63,6 +67,7 @@ fun InfoWithIcon(icon: ImageVector, info: String) {
     }
 }
 
+//Todo 6: provide scrollState remember value for previewing
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
@@ -73,6 +78,6 @@ fun DetailScreenPreview() {
             title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
             description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
             publishedAt = "2021-11-04T04:42:40Z"
-        )
+        ), rememberScrollState()
     )
 }

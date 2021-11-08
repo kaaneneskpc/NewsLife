@@ -29,7 +29,6 @@ fun TopNews(navController: NavController) {
        LazyColumn{
             items(MockData.topNewsList){newsData->
                 TopNewsItem(newsData =newsData,
-                    //Todo 2 add the function to navigate to the detail screen passing the id for clicked item
                 onNewsClick = {  navController.navigate("Detail/${newsData.id}")}
                     )
             }
@@ -42,7 +41,6 @@ fun TopNewsItem(newsData: NewsData,onNewsClick: () -> Unit = {},) {
     Box(modifier = Modifier
         .height(200.dp)
         .padding(8.dp).clickable {
-            //Todo 1: make each item clickable and add the onNewsClick function
           onNewsClick()
         }) {
         Image(painter = painterResource(id = newsData.image), contentDescription ="",contentScale = ContentScale.FillBounds)

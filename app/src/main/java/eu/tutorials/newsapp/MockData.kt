@@ -67,7 +67,6 @@ object MockData {
 
 
 
-    //Todo 6 : implement a method to filter a news by its id
     fun getNews(newsId: Int?): NewsData {
         return topNewsList.first { it.id == newsId }
     }

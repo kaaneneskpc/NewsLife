@@ -12,28 +12,23 @@ import eu.tutorials.newsapp.ui.screen.TopNews
 
 @Composable
 fun NewsApp() {
- Navigation()
+    Navigation()
 }
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "TopNews") {
-       composable("TopNews") {
+        composable("TopNews") {
             TopNews(navController = navController)
         }
-        //Todo 7: add a placeholder for the argument to be received
         composable("Detail/{newsId}",
-            //Todo 8: provide the argument type usiing NavType
             arguments = listOf(
                 navArgument("newsId") { type = NavType.IntType }
-            )){navBackStackEntry->
-            //Todo 9 receive the id from NavBackStackEntry, we use getInt since its pf Int type and pass in the key
+            )) { navBackStackEntry ->
             val id = navBackStackEntry.arguments?.getInt("newsId")
-            //Todo 10:pass in the id to getNews created in MockData to retrieve selected news
             val newsData = MockData.getNews(id)
-            //Todo 11: provide newsData as a value to detail screen
-            DetailScreen(navController,newsData)
+            DetailScreen(newsData)
         }
     }
 }

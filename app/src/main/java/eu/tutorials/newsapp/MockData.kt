@@ -13,6 +13,7 @@ object MockData {
         ),
         NewsData(
             2,
+            R.drawable.namita,
             author = "Namita Singh",
             title = "Cleo Smith news — live: Kidnap suspect 'in hospital again' as 'hard police grind' credited for breakthrough - The Independent",
             description = "The suspected kidnapper of four-year-old Cleo Smith has been treated in hospital for a second time amid reports he was “attacked” while in custody.",
@@ -20,6 +21,7 @@ object MockData {
         ),
         NewsData(
             3,
+            R.drawable.reuters,
             author = "Not available",
             title = "'You are not alone': EU Parliament delegation tells Taiwan on first official visit - Reuters",
             description =
@@ -28,6 +30,7 @@ object MockData {
         ),
         NewsData(
             4,
+            R.drawable.michael,
             author = "Mike Florio",
             title = "Aaron Rodgers violated COVID protocol by doing maskless indoor press conferences - NBC Sports",
             description = "Packers quarterback Aaron Rodgers has been conducting in-person press conferences in the Green Bay facility without wearing a mask. Because he was secretly unvaccinated, Rodgers violated the rules.",
@@ -35,6 +38,7 @@ object MockData {
         ),
         NewsData(
             5,
+            R.drawable.grant,
             author = "Grant Brisbee",
             title = "Buster Posey's career was like no other in Giants history - The Athletic",
             description = "There was a franchise without Buster Posey, and there was one with him, and those two franchises were radically, impossibly different.",
@@ -49,6 +53,7 @@ object MockData {
         ),
         NewsData(
             7,
+            R.drawable.thomas,
             author = "Thomas Barrabi",
             title = "Sen. Murkowski slams Dems over 'show votes' on federal election bills - Fox News",
             description = "Sen. Lisa Murkowski, R-Alaska, slammed Senate Democrats for pursuing “show votes” on federal election bills on Wednesday as Republicans used the filibuster to block consideration the John Lewis Voting Rights Advancement Act.",

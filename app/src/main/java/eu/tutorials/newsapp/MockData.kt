@@ -76,7 +76,6 @@ object MockData {
         return topNewsList.first { it.id == newsId }
     }
 
-    //Todo 8: create time ago method as a Date extension function
     fun Date.getTimeAgo(): String {
         val calendar = Calendar.getInstance()
         calendar.time = this
@@ -114,7 +113,6 @@ object MockData {
             "a moment ago"
         }
     }
-//Todo 9: Create a method to convert String to date
     fun stringToDate(publishedAt: String): Date {
             val date =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -126,3 +124,4 @@ object MockData {
             return date
     }
 }
+

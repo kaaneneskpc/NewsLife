@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusOrder
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -48,7 +49,6 @@ fun TopNewsItem(newsData: NewsData,onNewsClick: () -> Unit = {},) {
         Column(modifier = Modifier
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp),verticalArrangement = Arrangement.SpaceBetween) {
-            //Todo 11: format published at to time ago
             Text(text = MockData.stringToDate(newsData.publishedAt).getTimeAgo(),color = Color.White,fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(100.dp))
             Text(text = newsData.title,color = Color.White,fontWeight = FontWeight.SemiBold)

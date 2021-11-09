@@ -26,13 +26,9 @@ import eu.tutorials.newsapp.MockData.getTimeAgo
 import eu.tutorials.newsapp.NewsData
 import eu.tutorials.newsapp.R
 
-//Todo 4: create navController variable
 @Composable
 fun DetailScreen(newsData: NewsData, scrollState: ScrollState,navController: NavController) {
-    //Todo 1: Add a scaffold, reference topBar with empty block and move the Column into its block
     Scaffold(topBar = {
-        //Todo 3: pass in detailTopApp as the value for topBar
-        //Todo 5: call popBacStack on navController to go back to the previous screen
         DetailTopAppBar(onBackPressed = {navController.popBackStack()})
     }) {
         Column(
@@ -50,7 +46,6 @@ fun DetailScreen(newsData: NewsData, scrollState: ScrollState,navController: Nav
                     .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 InfoWithIcon(Icons.Default.Edit, info = newsData.author)
-                //Todo 10: format publishedAt to show timeAgo
                 InfoWithIcon(icon = Icons.Default.DateRange, info = MockData.stringToDate(newsData.publishedAt).getTimeAgo())
             }
             Text(text = newsData.title, fontWeight = FontWeight.Bold)
@@ -59,9 +54,6 @@ fun DetailScreen(newsData: NewsData, scrollState: ScrollState,navController: Nav
     }
 }
 
-/** Todo 2: create composable for the detail top bar with TopAppBar
- * containing a title and the navigationIcon
- */
 @Composable
 fun DetailTopAppBar(onBackPressed: () -> Unit = {}) {
     TopAppBar(title = { Text(text = "Detail Screen", fontWeight = FontWeight.SemiBold) },
@@ -87,7 +79,6 @@ fun InfoWithIcon(icon: ImageVector, info: String) {
     }
 }
 
-//Todo 6: provide value for nav controller
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {

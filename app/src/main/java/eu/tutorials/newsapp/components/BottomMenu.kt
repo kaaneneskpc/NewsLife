@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,11 +25,16 @@ fun BottomMenu(navController:NavController) {
     //Todo 7: Add th BottomNavigation, loop through each item and set to bottom navigation item
     BottomNavigation(contentColor = colorResource(id = R.color.white))
     {
+        //Todo 14: get the destination route via the nav back stack entry and set icon color when an item is selected
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
         menuItems.forEach {
             BottomNavigationItem(
                 label = { Text(text = it.title) },
                 alwaysShowLabel = true,
-                selected = false,
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.Gray,
+                selected = currentRoute == it.route,
                 onClick = {
                     navController.navigate(it.route) {
                         navController.graph.startDestinationRoute?.let { route ->

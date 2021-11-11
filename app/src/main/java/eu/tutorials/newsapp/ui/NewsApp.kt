@@ -39,10 +39,9 @@ fun MainScreen(navController: NavHostController,scrollState: ScrollState) {
 
 @Composable
 fun Navigation(navController:NavHostController,scrollState: ScrollState,newsManager: NewsManager= NewsManager(),paddingValues: PaddingValues) {
-    val articles = newsManager.newsResponse.value.articles
-    articles?.let {
+    val articles = newsManager.newsResponse.value.articles?: listOf(Articles())
     NavHost(navController = navController, startDestination =BottomMenuScreen.TopNews.route,modifier = Modifier.padding(paddingValues)) {
-        bottomNavigation(navController = navController,articles)
+        bottomNavigation(navController = navController,articles,newsManager)
         composable("Detail/{index}",
             arguments = listOf(
                 navArgument("index") { type = NavType.IntType }
@@ -52,13 +51,16 @@ fun Navigation(navController:NavHostController,scrollState: ScrollState,newsMana
                 DetailScreen(articles = articles[index], scrollState, navController)
             }
         }
-        }
     }
 }
 
-fun NavGraphBuilder.bottomNavigation(navController: NavController,articles: List<Articles>) {
-    composable(BottomMenuScreen.TopNews.route) {
-        TopNews(navController = navController,articles)
+fun NavGraphBuilder.bottomNavigation(navController: NavController,articles: List<Articles>,newsManager: NewsManager) {
+   composable(BottomMenuScreen.TopNews.route) {
+        TopNews(navController = navController,articles,
+            newsManager=newsManager,
+            query = newsManager.query,
+            searchedArticles = newsManager.searchedNewsResponse.value.articles?: listOf(Articles())
+        )
     }
     composable(BottomMenuScreen.Categories.route) {
         Categories()

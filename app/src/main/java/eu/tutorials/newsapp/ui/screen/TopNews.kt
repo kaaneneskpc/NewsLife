@@ -1,5 +1,6 @@
 package eu.tutorials.newsapp.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,23 +35,20 @@ import eu.tutorials.newsapp.model.Articles
 import eu.tutorials.newsapp.ui.NewsManager
 
 @Composable
-fun TopNews(navController: NavController,articles: List<Articles>,searchedArticles: List<Articles>,
+fun TopNews(navController: NavController,articles: List<Articles>,
             query:MutableState<String>,newsManager: NewsManager) {
     val searchedText = query.value
     Column(modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally) {
        SearchView(query,newsManager)
+        val resultList = mutableListOf<Articles>()
+        if (searchedText != "") {
+            resultList.addAll(newsManager.searchedNewsResponse.value.articles ?: listOf(Articles()))
+        }else{
+            resultList.addAll(articles)
+        }
                LazyColumn{
-                   val filteredArticles = if (searchedText.isEmpty()) {
-                       articles
-                   } else {
-                       val resultList = ArrayList<Articles>()
-                       for (article in searchedArticles) {
-                           resultList.add(article)
-                       }
-                       resultList
-                   }
-                   items(filteredArticles.size){index->
-                       TopNewsItem(articles = filteredArticles[index],
+                   items(resultList.size){index->
+                       TopNewsItem(articles = resultList[index],
                            onNewsClick = {  navController.navigate("Detail/${index}")}
                        )
                    }

@@ -5,8 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import eu.tutorials.newsapp.data.ArticleCategory
+import eu.tutorials.newsapp.data.getArticleCategory
 import eu.tutorials.newsapp.model.NewsResponse
 import eu.tutorials.newsapp.network.Api
+import eu.tutorials.newsapp.network.NewsService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,14 +33,21 @@ class NewsManager {
             _searchedNewsResponse
         }
 
-    init {
-        getArticles()
-        //getSearchedArticles(query.value)
-    }
+    private val _getArticleByCategory =
+        mutableStateOf(NewsResponse())
+    val getArticleByCategory:MutableState<NewsResponse>
+        @Composable get() = remember {
+            _getArticleByCategory
+        }
 
-    private fun getArticles(){
-        val service = Api.retrofitService.getTopArticles("us","d2691289ff474bb9850b71fa026ce470")
-        service.enqueue(object :Callback<NewsResponse>{
+    val selectedCategory:MutableState<ArticleCategory?> = mutableStateOf(null)
+
+init {
+    getArticles()
+}
+     fun getArticles(){
+        val client =Api.retrofitService.getTopArticles("us","d2691289ff474bb9850b71fa026ce470")
+        client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if (response.isSuccessful){
                     _newsResponse.value = response.body()!!
@@ -55,8 +65,8 @@ class NewsManager {
     }
 
      fun getSearchedArticles(query: String){
-        val service = Api.retrofitService.searchArticles(query,"d2691289ff474bb9850b71fa026ce470")
-        service.enqueue(object :Callback<NewsResponse>{
+        val client = Api.retrofitService.searchArticles(query,"d2691289ff474bb9850b71fa026ce470")
+        client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if (response.isSuccessful){
                     _searchedNewsResponse.value = response.body()!!
@@ -73,7 +83,32 @@ class NewsManager {
         })
     }
 
+    fun getArticlesByCategory(category: String="business"){
+        val client = Api.retrofitService.getCategories(category,"d2691289ff474bb9850b71fa026ce470")
+        client.enqueue(object :Callback<NewsResponse>{
+            override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                if (response.isSuccessful){
+                    _getArticleByCategory.value = response.body()!!
+                    Log.d("carte","${_getArticleByCategory.value}")
+                }else{
+                    Log.d("carte","${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                Log.d("searcherror","${t.printStackTrace()}")
+            }
+
+        })
+    }
+
+    fun onSelectedCategoryChanged(category:String){
+        val newCategory = getArticleCategory(category = category)
+        selectedCategory.value = newCategory
+    }
+
     fun onQueryChanged(query: String){
         this.query.value = query
     }
+
 }

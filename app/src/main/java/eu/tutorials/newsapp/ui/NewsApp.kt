@@ -12,8 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import eu.tutorials.newsapp.BottomMenuScreen
-import eu.tutorials.newsapp.MockData
 import eu.tutorials.newsapp.components.BottomMenu
+import eu.tutorials.newsapp.data.getAllArticleCategory
 import eu.tutorials.newsapp.model.Articles
 import eu.tutorials.newsapp.ui.screen.Categories
 import eu.tutorials.newsapp.ui.screen.DetailScreen
@@ -38,8 +38,9 @@ fun MainScreen(navController: NavHostController,scrollState: ScrollState) {
 
 
 @Composable
-fun Navigation(navController:NavHostController,scrollState: ScrollState,newsManager: NewsManager= NewsManager(),paddingValues: PaddingValues) {
-    val articles = newsManager.newsResponse.value.articles?: listOf(Articles())
+fun Navigation(navController:NavHostController, scrollState: ScrollState, newsManager: NewsManager= NewsManager(), paddingValues: PaddingValues) {
+    val articles = mutableListOf<Articles>()
+            articles.addAll(newsManager.newsResponse.value.articles?: listOf(Articles()))
     NavHost(navController = navController, startDestination =BottomMenuScreen.TopNews.route,modifier = Modifier.padding(paddingValues)) {
         bottomNavigation(navController = navController,articles,newsManager)
         composable("Detail/{index}",
@@ -59,11 +60,13 @@ fun NavGraphBuilder.bottomNavigation(navController: NavController,articles: List
         TopNews(navController = navController,articles,
             newsManager=newsManager,
             query = newsManager.query,
-            searchedArticles = newsManager.searchedNewsResponse.value.articles?: listOf(Articles())
+
         )
     }
     composable(BottomMenuScreen.Categories.route) {
-        Categories()
+        newsManager.getArticlesByCategory("business")
+        Categories(newsManager=newsManager,onFetchCategory = {newsManager.onSelectedCategoryChanged(it)
+            newsManager.getArticlesByCategory(it)})
     }
     composable(BottomMenuScreen.Sources.route) {
         Sources()

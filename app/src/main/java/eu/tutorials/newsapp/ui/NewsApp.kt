@@ -52,8 +52,12 @@ fun Navigation(navController:NavHostController, scrollState: ScrollState, newsMa
                 if (newsManager.query.value.isNotEmpty()) {
                     articles.clear()
                     articles.addAll(newsManager.searchedNewsResponse.value.articles?: listOf(Articles()))
-                    DetailScreen(articles = articles[index], scrollState, navController)
+                }else{
+                    articles.clear()
+                    articles.addAll(newsManager.newsResponse.value.articles?: listOf(Articles()))
                 }
+
+                DetailScreen(articles = articles[index], scrollState, navController)
             }
         }
     }

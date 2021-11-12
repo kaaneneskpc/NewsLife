@@ -49,7 +49,11 @@ fun Navigation(navController:NavHostController, scrollState: ScrollState, newsMa
             )) { navBackStackEntry ->
             val index = navBackStackEntry.arguments?.getInt("index")
             if (index != null) {
-                DetailScreen(articles = articles[index], scrollState, navController)
+                if (newsManager.query.value.isNotEmpty()) {
+                    articles.clear()
+                    articles.addAll(newsManager.searchedNewsResponse.value.articles?: listOf(Articles()))
+                    DetailScreen(articles = articles[index], scrollState, navController)
+                }
             }
         }
     }

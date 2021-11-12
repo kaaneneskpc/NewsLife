@@ -38,7 +38,7 @@ fun Categories(onFetchCategory:(String)->Unit,newsManager: NewsManager) {
             )
         }
     }
-        PagerContent(articles = newsManager.searchedNewsResponse.value.articles?: listOf(Articles()))
+        PagerContent(articles = newsManager.getArticleByCategory.value.articles?: listOf(Articles()))
     }
 }
 

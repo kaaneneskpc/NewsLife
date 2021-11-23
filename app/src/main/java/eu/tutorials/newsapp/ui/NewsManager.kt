@@ -65,7 +65,7 @@ init {
     }
 
      fun getSearchedArticles(query: String){
-        val client = Api.retrofitService.searchArticles(query,"d2691289ff474bb9850b71fa026ce470")
+        val client = Api.retrofitService.searchArticles(query,"")
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if (response.isSuccessful){
@@ -84,7 +84,7 @@ init {
     }
 
     fun getArticlesByCategory(category: String="business"){
-        val client = Api.retrofitService.getCategories(category,"d2691289ff474bb9850b71fa026ce470")
+        val client = Api.retrofitService.getCategories(category,"")
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 if (response.isSuccessful){

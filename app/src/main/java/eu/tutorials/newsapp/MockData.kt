@@ -114,14 +114,13 @@ object MockData {
         }
     }
     fun stringToDate(publishedAt: String): Date {
-            val date =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
-                } else {
-                    java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
-                }
-               Log.d("published","$date")
-            return date
+        val date =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
+            } else {
+                java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssxx", Locale.ENGLISH).parse(publishedAt)
+            }
+        Log.d("published","$date")
+        return date
     }
 }
-

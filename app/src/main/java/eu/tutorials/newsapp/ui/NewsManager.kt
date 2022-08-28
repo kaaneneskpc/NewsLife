@@ -46,13 +46,13 @@ init {
     getArticles()
 }
      fun getArticles(){
-        val client =Api.retrofitService.getTopArticles("us","d2691289ff474bb9850b71fa026ce470")
+        val client =Api.retrofitService.getTopArticles("us")
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
-                if (response.isSuccessful){
+                response.takeIf { it.isSuccessful }?.apply {
                     _newsResponse.value = response.body()!!
                     Log.d("art2","${_newsResponse.value}")
-                }else{
+                }?:run {
                     Log.d("art2","${response.code()}")
                 }
             }
@@ -65,13 +65,13 @@ init {
     }
 
      fun getSearchedArticles(query: String){
-        val client = Api.retrofitService.searchArticles(query,"")
+        val client = Api.retrofitService.searchArticles(query)
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
-                if (response.isSuccessful){
+                response.takeIf { it.isSuccessful }?.apply {
                     _searchedNewsResponse.value = response.body()!!
                     Log.d("search","${_searchedNewsResponse.value}")
-                }else{
+                }?:run {
                     Log.d("search","${response.code()}")
                 }
             }
@@ -84,13 +84,13 @@ init {
     }
 
     fun getArticlesByCategory(category: String="business"){
-        val client = Api.retrofitService.getCategories(category,"")
+        val client = Api.retrofitService.getCategories(category)
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
-                if (response.isSuccessful){
+                response.takeIf { it.isSuccessful }?.apply {
                     _getArticleByCategory.value = response.body()!!
                     Log.d("carte","${_getArticleByCategory.value}")
-                }else{
+                }?:run {
                     Log.d("carte","${response.code()}")
                 }
             }

@@ -59,6 +59,7 @@ fun TopNewsItem(articles: Articles,onNewsClick: () -> Unit = {},) {
             // Crop, Fit, Inside, FillHeight, FillWidth, None
             contentScale = ContentScale.Crop,
             // shows a placeholder ImageBitmap when loading.
+            error = ImageBitmap.imageResource(R.drawable.breaking_news),
             placeHolder = ImageBitmap.imageResource(R.drawable.breaking_news)
         )
         Column(modifier = Modifier

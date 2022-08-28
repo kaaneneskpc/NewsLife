@@ -1,10 +1,10 @@
 package eu.tutorials.newsapp.network
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import eu.tutorials.newsapp.data.ArticleCategory
+import eu.tutorials.newsapp.data.getAllArticleCategory
+import eu.tutorials.newsapp.data.getArticleCategory
 import eu.tutorials.newsapp.model.NewsResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,12 +17,13 @@ class NewsManager {
     @Composable get() = remember {
         _newsResponse
     }
+
     init {
         getArticles()
     }
 
     private fun getArticles() {
-        val service = Api.retrofitService.getTopArticles("us", Api.API_KEY)
+        val service = Api.retrofitService.getTopArticles("us")
         service.enqueue(object: Callback<NewsResponse> {
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 response.takeIf { it.isSuccessful }?.apply {
@@ -39,5 +40,4 @@ class NewsManager {
 
         })
     }
-
 }

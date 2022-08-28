@@ -45,7 +45,8 @@ fun DetailScreen(articles: Articles, scrollState: ScrollState,navController: Nav
                 // Crop, Fit, Inside, FillHeight, FillWidth, None
                 contentScale = ContentScale.Crop,
             // shows a placeholder ImageBitmap when loading.
-            placeHolder = ImageBitmap.imageResource(R.drawable.breaking_news)
+                error = ImageBitmap.imageResource(R.drawable.breaking_news),
+                placeHolder = ImageBitmap.imageResource(R.drawable.breaking_news)
             )
             Row(
                 modifier = Modifier

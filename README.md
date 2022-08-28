@@ -29,4 +29,6 @@ News App with Using Compose
 
 # Screenshoots 
 
-<img width="408" alt="Screen Shot 2022-08-28 at 19 45 06" src="https://user-images.githubusercontent.com/32849662/187085223-8964214b-80e7-49ad-86e3-fc6bee8a72ef.png">
+<ul align="left">
+ <li> <img width="200" alt="Screen Shot 2022-08-28 at 19 45 06" src="https://user-images.githubusercontent.com/32849662/187085223-8964214b-80e7-49ad-86e3-fc6bee8a72ef.png"> </li>
+</ul>  

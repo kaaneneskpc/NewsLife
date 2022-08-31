@@ -29,7 +29,15 @@ News App with Using Compose
 
 # Screenshoots 
 
+<table>
+  <tr>
+    <th><img width="200" alt="Screen Shot 2022-08-28 at 19 45 06" src="https://user-images.githubusercontent.com/32849662/187085223-8964214b-80e7-49ad-86e3-fc6bee8a72ef.png"></th>
+    <th><img width="200" alt="Screen Shot 2022-08-31 at 23 56 35" src="https://user-images.githubusercontent.com/32849662/187780868-b1218a81-bd47-429e-b122-14dd6f7595ec.png"></th>
+    <th>Country</th>
+  </tr>
+  <tr>
+
 <ul align="left">
- <li> <img width="200" alt="Screen Shot 2022-08-28 at 19 45 06" src="https://user-images.githubusercontent.com/32849662/187085223-8964214b-80e7-49ad-86e3-fc6bee8a72ef.png"> </li>
- <li> <img width="200" alt="Screen Shot 2022-08-31 at 23 56 35" src="https://user-images.githubusercontent.com/32849662/187780868-b1218a81-bd47-429e-b122-14dd6f7595ec.png"> </li>
+ <li>  </li>
+ <li> < </li>
 </ul>  

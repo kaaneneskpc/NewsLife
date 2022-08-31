@@ -55,9 +55,7 @@ fun Navigation(navController:NavHostController, scrollState: ScrollState, newsMa
             index.takeIf { it != null }?.apply {
                 newsManager.query.value.takeIf { it.isNotEmpty() }?.apply {
                     articles.clear()
-                    articles.addAll(
-                        newsManager.searchedNewsResponse.value.articles ?: listOf(Articles())
-                    )
+                    articles.addAll(newsManager.searchedNewsResponse.value.articles ?: listOf(Articles()))
                 } ?: run {
                     articles.clear()
                     articles.addAll(newsManager.newsResponse.value.articles ?: listOf(Articles()))
@@ -72,8 +70,7 @@ fun NavGraphBuilder.bottomNavigation(navController: NavController,articles: List
    composable(BottomMenuScreen.TopNews.route) {
         TopNews(navController = navController,articles,
             newsManager=newsManager,
-            query = newsManager.query,
-
+            query = newsManager.query
         )
     }
     composable(BottomMenuScreen.Categories.route) {
@@ -83,6 +80,6 @@ fun NavGraphBuilder.bottomNavigation(navController: NavController,articles: List
             newsManager.getArticlesByCategory(it)})
     }
     composable(BottomMenuScreen.Sources.route) {
-        Sources()
+        Sources(newsManager = newsManager)
     }
 }

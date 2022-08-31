@@ -24,6 +24,8 @@ class NewsManager {
         _newsResponse
     }
 
+    val sourceName = mutableStateOf("abc-news")
+
     val query = mutableStateOf("")
 
     private val _searchedNewsResponse =
@@ -38,6 +40,12 @@ class NewsManager {
     val getArticleByCategory:MutableState<NewsResponse>
         @Composable get() = remember {
             _getArticleByCategory
+        }
+
+    private val _getArticleBySource =  mutableStateOf(NewsResponse())
+    val getArticleBySource :MutableState<NewsResponse>
+        @Composable get() = remember {
+            _getArticleBySource
         }
 
     val selectedCategory:MutableState<ArticleCategory?> = mutableStateOf(null)
@@ -65,7 +73,7 @@ init {
     }
 
      fun getSearchedArticles(query: String){
-        val client = Api.retrofitService.searchArticles(query)
+        val client = Api.retrofitService.getSearchedArticles(query)
         client.enqueue(object :Callback<NewsResponse>{
             override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                 response.takeIf { it.isSuccessful }?.apply {
@@ -96,7 +104,26 @@ init {
             }
 
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-                Log.d("searcherror","${t.printStackTrace()}")
+                Log.d("carteerror","${t.printStackTrace()}")
+            }
+
+        })
+    }
+
+    fun getArticleBySource(){
+        val client = Api.retrofitService.getArticlesBySource(sourceName.value)
+        client.enqueue(object :Callback<NewsResponse>{
+            override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
+                response.takeIf { it.isSuccessful }?.apply {
+                    _getArticleBySource.value = response.body()!!
+                    Log.d("source","${_getArticleBySource.value}")
+                }?:run {
+                    Log.d("source","${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
+                Log.d("sourceerror","${t.printStackTrace()}")
             }
 
         })

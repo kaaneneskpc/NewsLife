@@ -54,7 +54,9 @@ fun DetailScreen(articles: Articles, scrollState: ScrollState,navController: Nav
                     .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                     InfoWithIcon(Icons.Default.Edit, info = articles.author ?: "Not Available")
-                InfoWithIcon(icon = Icons.Default.DateRange, info = MockData.stringToDate(articles.publishedAt!!).getTimeAgo())
+                articles.publishedAt?.let {
+                    InfoWithIcon(icon = Icons.Default.DateRange, info = MockData.stringToDate(articles.publishedAt).getTimeAgo())
+                }
             }
             Text(text = articles.title ?:"Not Available", fontWeight = FontWeight.Bold)
             Text(text = articles.description ?: "Not Available", modifier = Modifier.padding(top = 16.dp))

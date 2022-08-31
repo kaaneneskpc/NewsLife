@@ -11,8 +11,11 @@ interface NewsService {
     fun getTopArticles(@Query("country") country:String):Call<NewsResponse>
 
     @GET("everything")
-    fun searchArticles(@Query("q") country:String):Call<NewsResponse>
+    fun getArticlesBySource(@Query("sources") source:String):Call<NewsResponse>
+
+    @GET("everything")
+    fun getSearchedArticles(@Query("q") source:String):Call<NewsResponse>
 
     @GET("top-headlines")
-    fun getCategories(@Query("category")category:String):Call<NewsResponse>
+    fun getCategories(@Query("category") category:String):Call<NewsResponse>
 }

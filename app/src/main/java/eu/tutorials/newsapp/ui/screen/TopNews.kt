@@ -65,9 +65,19 @@ fun TopNewsItem(articles: Articles,onNewsClick: () -> Unit = {},) {
         Column(modifier = Modifier
             .wrapContentHeight()
             .padding(top = 16.dp, start = 16.dp),verticalArrangement = Arrangement.SpaceBetween) {
-            Text(text = MockData.stringToDate(articles.publishedAt?:"2021-11-05T13:32:14Z").getTimeAgo(),color = Color.White,fontWeight = FontWeight.SemiBold)
+            articles.publishedAt?.let {
+                Text(text = MockData.stringToDate(articles.publishedAt).getTimeAgo(),
+                    color = Color.White,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
             Spacer(modifier = Modifier.height(100.dp))
-            Text(text = articles.title?:"Not Available",color = Color.White,fontWeight = FontWeight.SemiBold)
+            articles.title?.let {
+                Text(text = articles.title,
+                    color = Color.White,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ News App with Using Compose
   <tr>
     <th><img width="200" alt="Screen Shot 2022-08-28 at 19 45 06" src="https://user-images.githubusercontent.com/32849662/187085223-8964214b-80e7-49ad-86e3-fc6bee8a72ef.png"></th>
     <th><img width="200" alt="Screen Shot 2022-08-31 at 23 56 35" src="https://user-images.githubusercontent.com/32849662/187780868-b1218a81-bd47-429e-b122-14dd6f7595ec.png"></th>
+    <th><img width="200" alt="Screen Shot 2022-08-28 at 20 57 35" src="https://user-images.githubusercontent.com/32849662/187788870-1035409c-34e9-4add-b348-9735542e7652.png"></th>
+    <th><img width="200" alt="Screen Shot 2022-08-28 at 20 58 05" src="https://user-images.githubusercontent.com/32849662/187788879-58161662-c371-4099-b835-95b733d97cf6.png"></th>
   </tr>
-  <tr>
 </table>

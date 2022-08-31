@@ -36,8 +36,4 @@ News App with Using Compose
     <th>Country</th>
   </tr>
   <tr>
-
-<ul align="left">
- <li>  </li>
- <li> < </li>
-</ul>  
+</table>

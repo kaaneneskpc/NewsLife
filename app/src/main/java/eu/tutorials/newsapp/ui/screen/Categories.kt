@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
@@ -18,29 +20,40 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.skydoves.landscapist.coil.CoilImage
 import eu.tutorials.newsapp.MockData
 import eu.tutorials.newsapp.MockData.getTimeAgo
 import eu.tutorials.newsapp.R
+import eu.tutorials.newsapp.components.ErrorUI
+import eu.tutorials.newsapp.components.LoadingUI
 import eu.tutorials.newsapp.data.getAllArticleCategory
 import eu.tutorials.newsapp.model.Articles
-import eu.tutorials.newsapp.ui.NewsManager
+import eu.tutorials.newsapp.ui.viewModel.BaseViewModel
 
 @Composable
-fun Categories(onFetchCategory:(String)->Unit,newsManager: NewsManager) {
+fun Categories(onFetchCategory:(String)->Unit, viewModel: BaseViewModel, isError: MutableState<Boolean>, isLoading: MutableState<Boolean>) {
     val tabsItems = getAllArticleCategory()
     Column {
-    LazyRow() {
-        items(tabsItems.size) {
-            val category = tabsItems[it]
-            CategoryTab(
-                category = category.category, onFetchCategory = onFetchCategory, isSelected =
-                newsManager.selectedCategory.value == category
-            )
+        when {
+            isLoading.value -> {
+                LoadingUI()
+            }
+            isError.value -> {
+                ErrorUI()
+            } else -> {
+            LazyRow {
+                items(tabsItems.size) {
+                    val category = tabsItems[it]
+                    CategoryTab(
+                        category = category.category,
+                        onFetchCategory = onFetchCategory,
+                        isSelected = viewModel.selectedCategory.collectAsState().value == category
+                    )
+                }
+            }
         }
-    }
-        PagerContent(articles = newsManager.getArticleByCategory.value.articles?: listOf(Articles()))
+        }
+
+        PagerContent(articles = viewModel.getArticleByCategory.collectAsState().value.articles?: listOf(Articles()))
     }
 }
 
@@ -69,7 +82,7 @@ fun CategoryTab(category: String,
 }
 
 @Composable
-fun PagerContent(articles: List<Articles>,modifier:Modifier = Modifier.padding(8.dp)) {
+fun PagerContent(articles: List<Articles>,modifier:Modifier = Modifier) {
     LazyColumn{
      items(articles){article->
          Card(modifier, border = BorderStroke(2.dp,color = colorResource(id = R.color.purple_500))

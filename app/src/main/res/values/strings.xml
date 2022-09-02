@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="error_state_message">An Error occurred.Please try again.</string>
 </resources>

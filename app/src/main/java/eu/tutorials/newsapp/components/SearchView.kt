@@ -23,10 +23,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.tutorials.newsapp.ui.NewsManager
+import androidx.lifecycle.viewmodel.compose.viewModel
+import eu.tutorials.newsapp.ui.viewModel.BaseViewModel
 
 @Composable
-fun SearchView(query:MutableState<String>,newsManager: NewsManager) {
+fun SearchView(query:MutableState<String>,viewModel: BaseViewModel) {
     val localFocusManager = LocalFocusManager.current
     Card(elevation = 6.dp,shape = RoundedCornerShape(4.dp),modifier = Modifier
         .fillMaxWidth()
@@ -34,7 +35,7 @@ fun SearchView(query:MutableState<String>,newsManager: NewsManager) {
         backgroundColor = MaterialTheme.colors.primary) {
     Row {
         TextField(value = query.value, onValueChange = {
-            newsManager.onQueryChanged(it)
+            query.value = it
         }, modifier = Modifier
             .fillMaxWidth(),
             label = {
@@ -65,7 +66,7 @@ fun SearchView(query:MutableState<String>,newsManager: NewsManager) {
             keyboardActions = KeyboardActions(
                 onSearch = {
                     if (query.value != "") {
-                        newsManager.getSearchedArticles(query.value)
+                        viewModel.getSearchedArticles(query.value)
                     }
                     localFocusManager.clearFocus()
                 }
@@ -80,5 +81,5 @@ fun SearchView(query:MutableState<String>,newsManager: NewsManager) {
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchView(query = mutableStateOf(""),NewsManager())
+    SearchView(query = mutableStateOf(""), viewModel())
 }
